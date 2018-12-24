@@ -1,4 +1,4 @@
-package sa.elect.projection;
+package sa.elect.service.projection;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -9,7 +9,7 @@ import lombok.*;
 @ToString(of = {"id"})
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class ElectionUser {
 	@JsonProperty("id")
 	public Integer id;
 	@JsonProperty("first_name")

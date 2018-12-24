@@ -7,8 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.util.Assert;
-import sa.elect.projection.User;
+import sa.elect.service.projection.ElectionUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class TestSerialization {
 		m.put("id", 1);
 		m.put("role", "USER");
 		m.put("password", "USER");
-		User u = new ObjectMapper().convertValue(m, User.class);
+		ElectionUser u = new ObjectMapper().convertValue(m, ElectionUser.class);
 		System.out.println(u);
 	}
 

@@ -6,8 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sa.elect.projection.Role;
-import sa.elect.projection.User;
+import sa.elect.service.UserService;
+import sa.elect.service.projection.Role;
+import sa.elect.service.projection.ElectionUser;
 
 
 @RunWith(SpringRunner.class)
@@ -22,7 +23,7 @@ public class UserTest {
 	@Test
 	public void createAndAuth() {
 		String studentId = testHelper.randomStudentId();
-		User created = uService.createUser(User.builder()
+		ElectionUser created = uService.createUser(ElectionUser.builder()
 			.first("Test")
 			.last("Test")
 			.password("pswrf")
@@ -30,7 +31,7 @@ public class UserTest {
 			.role(Role.USER)
 			.build());
 		Assert.assertNotNull(created.getId());
-		User auth = uService.authenticate(studentId, "pswrf");
+		ElectionUser auth = uService.authenticate(studentId, "pswrf");
 		Assert.assertEquals(created, auth);
 	}
 
@@ -38,14 +39,14 @@ public class UserTest {
 	@Test(expected = Throwable.class)
 	public void duplicateStudentId(){
 		String studentId = testHelper.randomStudentId();
-		uService.createUser(User.builder()
+		uService.createUser(ElectionUser.builder()
 			.first("Test")
 			.last("Test")
 			.password("1234")
 			.studentId(studentId)
 			.role(Role.USER)
 			.build());
-		uService.createUser(User.builder()
+		uService.createUser(ElectionUser.builder()
 			.first("Tests")
 			.last("Testa")
 			.password("12341")
@@ -56,7 +57,7 @@ public class UserTest {
 
 	@Test(expected = Throwable.class)
 	public void badStudentId(){
-		uService.createUser(User.builder()
+		uService.createUser(ElectionUser.builder()
 			.first("Test")
 			.last("Test")
 			.password("1234")

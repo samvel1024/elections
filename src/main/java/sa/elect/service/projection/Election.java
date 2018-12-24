@@ -1,4 +1,4 @@
-package sa.elect.projection;
+package sa.elect.service.projection;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
