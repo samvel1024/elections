@@ -1,15 +1,17 @@
 package sa.elect.json;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.experimental.FieldDefaults;
 
-import java.io.Serializable;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
+import sa.elect.service.projection.Role;
 
 @Data
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
-public class JwtAuthenticationRequest {
+public class UserResponse {
 	String studentId;
-	String password;
+	Role role;
+	Integer userId;
 }

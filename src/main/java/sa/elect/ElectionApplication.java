@@ -28,21 +28,6 @@ public class ElectionApplication {
 	}
 
 
-	@Bean
-	@Primary
-	public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
-		ObjectMapper objectMapper = builder.build();
-		SimpleModule module = new SimpleModule();
-		module.addDeserializer(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
-			@Override
-			public LocalDateTime deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {
-				TextNode node = jp.getCodec().readTree(jp);
-				return LocalDateTime.parse(node.textValue(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSZ"));
-			}
-		});
-		objectMapper.registerModule(module);
-		return objectMapper;
-	}
 
 }
 
