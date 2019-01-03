@@ -1,4 +1,4 @@
-package sa.elect;
+package sa.elect.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sa.elect.security.SystemUser;
 import sa.elect.json.CreateUserRequest;
 import sa.elect.json.JwtAuthenticationRequest;
 import sa.elect.json.UserResponse;

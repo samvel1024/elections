@@ -1,4 +1,4 @@
-package sa.elect;
+package sa.elect.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

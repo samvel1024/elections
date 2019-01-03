@@ -1,5 +1,6 @@
 package sa.elect;
 
+import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sa.elect.service.UserService;
 import sa.elect.service.projection.Role;
 import sa.elect.service.projection.ElectionUser;
+
+import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
@@ -68,6 +71,12 @@ public class UserTest {
 
 
 
+	@Test
+	public void fetchByStudentId(){
+		val users = testHelper.users();
+		val fetched = uService.loadByStudentIds(users.stream().map(ElectionUser::getStudentId).collect(Collectors.toList()));
+		Assert.assertEquals(users, fetched);
+	}
 
 
 

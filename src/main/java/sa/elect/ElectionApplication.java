@@ -1,25 +1,19 @@
 package sa.elect;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.node.TextNode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @SpringBootApplication
 @Configuration
+@EnableSwagger2
 public class ElectionApplication {
 
 	public static void main(String[] args) {
@@ -27,6 +21,14 @@ public class ElectionApplication {
 		SpringApplication.run(ElectionApplication.class, args);
 	}
 
+	@Bean
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2)
+			.select()
+			.apis(RequestHandlerSelectors.basePackage("sa.elect.rest"))
+			.build()
+			.apiInfo(new ApiInfoBuilder().title("Elections REST API documentation").build());
+	}
 
 
 }
