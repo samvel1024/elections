@@ -14,4 +14,5 @@ public class UserResponse {
 	String studentId;
 	Role role;
 	Integer userId;
+	String name;
 }

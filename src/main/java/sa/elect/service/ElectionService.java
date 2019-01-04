@@ -17,6 +17,11 @@ public class ElectionService {
 	@Autowired Repository repo;
 
 
+	public Election getById(Integer id){
+		return repo.query(Election.class, "select * from election where id = ?", id);
+	}
+
+
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	public Election createElection(Election el, Collection<ElectionUser> registry) {
 		el = repo.query(Election.class, "\n" +

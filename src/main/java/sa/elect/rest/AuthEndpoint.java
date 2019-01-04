@@ -41,7 +41,8 @@ public class AuthEndpoint {
 		String token =  jwtTokenProvider.createToken(req.studentId);
 		response.addCookie(new Cookie("jwt-token",  token));
 		SystemUser principal = (SystemUser) authenticate.getPrincipal();
-		return new ResponseEntity<>(new UserResponse(principal.studentId, principal.role, principal.id), HttpStatus.OK);
+		return new ResponseEntity<>(new UserResponse(
+			principal.studentId, principal.role, principal.id, principal.first + ' ' + principal.last), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)

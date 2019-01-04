@@ -1,15 +1,12 @@
 package sa.elect.rest;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sa.elect.json.CreateElectionRequest;
 import sa.elect.json.ElectionResponse;
-import ma.glasnost.orika.MapperFacade;
 import sa.elect.security.SystemUser;
 import sa.elect.service.ElectionService;
 import sa.elect.service.UserService;
@@ -35,4 +32,21 @@ public class ElectionEndpoint {
 			.build(), userService.loadByStudentIds(req.getRegistryIds()));
 		return mapper.map(el, ElectionResponse.class);
 	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/{electionId}/myCandidacy")
+	@PreAuthorize("hasAuthority('USER')")
+	public void addMyCandidacy(@PathVariable Integer electionId, @AuthenticationPrincipal SystemUser user) {
+		electionService.addCandidacy(electionService.getById(electionId), user);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, path = "/{electionId}/vote")
+	@PreAuthorize("hasAuthority('USER')")
+	public void castMyCote(@RequestParam("target_user_id") Integer targetUserId,
+	                       @PathVariable Integer electionId,
+	                       @AuthenticationPrincipal SystemUser user) {
+		electionService.vote(user, userService.getById(targetUserId), electionService.getById(electionId));
+	}
+
+
+
 }

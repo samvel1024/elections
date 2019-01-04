@@ -24,6 +24,11 @@ public class UserService implements UserDetailsService {
 	@Autowired Repository repo;
 	@Autowired PasswordEncoder encoder;
 
+
+	public ElectionUser getById(Integer id){
+		return repo.query(ElectionUser.class, "select * from election_user where id = ?", id);
+	}
+
 	public ElectionUser createUser(ElectionUser user) {
 		String pass = encoder.encode(user.password);
 		ElectionUser u = repo.query(ElectionUser.class, "insert into election_user (first_name, last_name, student_id, password, role)\n" +

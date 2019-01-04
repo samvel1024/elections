@@ -1,17 +1,18 @@
 package sa.elect.json;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import sa.elect.service.projection.Election;
+import sa.elect.service.projection.ElectionUser;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PUBLIC)
-@Builder
+@NoArgsConstructor
 public class ElectionResponse {
 		Integer id;
 		LocalDateTime start;
@@ -19,4 +20,6 @@ public class ElectionResponse {
 		LocalDateTime deadline;
 		Integer creatorId;
 		String description;
+		ElectionStage stage;
+		List<ElectionUser> registry;
 }
