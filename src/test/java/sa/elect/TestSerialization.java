@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import sa.elect.service.Repository;
 import sa.elect.service.projection.ElectionUser;
 import sa.elect.testutil.TestHelper;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
@@ -22,9 +26,10 @@ import static junit.framework.TestCase.assertNotNull;
 public class TestSerialization {
 
 	@Autowired TestHelper testHelper;
+	@Autowired Repository repo;
 
 	@Test
-	public void testRowConversion(){
+	public void testRowConversion() {
 		Map<String, Object> m = new HashMap<>();
 		m.put("first_name", "S");
 		m.put("last_name", "A");
@@ -36,7 +41,7 @@ public class TestSerialization {
 	}
 
 	@Test
-	public void testLocalDateTime(){
+	public void testLocalDateTime() {
 		assertNotNull(testHelper.getNow());
 	}
 }
