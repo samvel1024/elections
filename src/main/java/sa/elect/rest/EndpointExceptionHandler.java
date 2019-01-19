@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -52,7 +50,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 
 
 	protected ResponseEntity<ExceptionDto> errorResponse(Throwable throwable,
-	                                                         HttpStatus status) {
+	                                                     HttpStatus status) {
 		if (null != throwable) {
 			log.error("error caught: " + throwable.getMessage(), throwable);
 			return response(ExceptionDto.fromException(throwable), status);
@@ -66,7 +64,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 		log.debug("Responding with a status of {}", status);
 		return new ResponseEntity<>(body, new HttpHeaders(), status);
 	}
-	
+
 	@Data
 	@NoArgsConstructor
 	@AllArgsConstructor
@@ -76,7 +74,7 @@ public class EndpointExceptionHandler extends ResponseEntityExceptionHandler {
 		@JsonProperty
 		String message;
 
-		public static ExceptionDto fromException(Throwable t){
+		public static ExceptionDto fromException(Throwable t) {
 			return new ExceptionDto(ExceptionUtils.getStackTrace(t).replace("\n", " ").replace("\t", " "), t.getMessage());
 		}
 	}

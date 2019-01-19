@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import sa.elect.json.CreateUserRequest;
+import sa.elect.json.JwtAuthenticationRequest;
 import sa.elect.json.UserJson;
 import sa.elect.security.JwtTokenProvider;
 import sa.elect.security.SystemUser;
-import sa.elect.json.JwtAuthenticationRequest;
 import sa.elect.service.UserService;
 import sa.elect.service.projection.ElectionUser;
 import sa.elect.service.projection.Role;
@@ -36,8 +36,8 @@ public class AuthEndpoint {
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public ResponseEntity<UserJson> signin(@RequestBody JwtAuthenticationRequest req, HttpServletResponse response) {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.studentId, req.password));
-		String token =  jwtTokenProvider.createToken(req.studentId);
-		response.addCookie(new Cookie("jwt-token",  token));
+		String token = jwtTokenProvider.createToken(req.studentId);
+		response.addCookie(new Cookie("jwt-token", token));
 		ElectionUser principal = (SystemUser) authenticate.getPrincipal();
 		return new ResponseEntity<>(mapperFacade.map(principal, UserJson.class), HttpStatus.OK);
 	}

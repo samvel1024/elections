@@ -8,8 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import sa.elect.service.projection.ElectionUser;
 import sa.elect.security.SystemUser;
+import sa.elect.service.projection.ElectionUser;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
 	@Autowired PasswordEncoder encoder;
 
 
-	public ElectionUser getById(Integer id){
+	public ElectionUser getById(Integer id) {
 		return repo.query(ElectionUser.class, "select * from election_user where id = ?", id);
 	}
 
@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
 
 	public Collection<ElectionUser> loadByStudentIds(List<String> studentIds) {
 		Assert.isTrue(!studentIds.isEmpty(), "There should be at least one studentId");
-		String in = "( " + new String(new char[studentIds.size()-1]).replace("\0", "?, ") + "? )";
+		String in = "( " + new String(new char[studentIds.size() - 1]).replace("\0", "?, ") + "? )";
 		Collection<ElectionUser> list = repo.queryMultiple(ElectionUser.class,
 			"select * from election_user where student_id in " + in, studentIds.toArray());
 		Assert.isTrue(studentIds.size() == list.size(),

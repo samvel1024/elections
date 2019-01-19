@@ -2,9 +2,9 @@ package sa.elect.testutil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sa.elect.service.projection.Election;
 import sa.elect.service.Repository;
 import sa.elect.service.UserService;
+import sa.elect.service.projection.Election;
 import sa.elect.service.projection.ElectionUser;
 import sa.elect.service.projection.Role;
 

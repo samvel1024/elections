@@ -99,17 +99,17 @@ public class ElectionService {
 	public Collection<ElectionResult> getResults(Election election) {
 		return repo.queryMultiple(ElectionResult.class,
 			"select max(voter.id)  as id," +
-			"max(voter.first_name) as first_name," +
-			"max(voter.last_name)  as last_name," +
-			"max(voter.student_id) as student_id," +
-			"max(voter.role)       as role," +
-			"max(voter.password)   as password," +
-			"max(voter.student_id) as student_id," +
-			"count(*)              as vote_count " +
-			"from vote" +
-			"       inner join election_registry er on vote.candidate_reg_id = er.id " +
-			"       inner join election_user voter on er.voter_id = voter.id " +
-			"where er.election_id = ?" +
-			"group by vote.candidate_reg_id ", election.id);
+				"max(voter.first_name) as first_name," +
+				"max(voter.last_name)  as last_name," +
+				"max(voter.student_id) as student_id," +
+				"max(voter.role)       as role," +
+				"max(voter.password)   as password," +
+				"max(voter.student_id) as student_id," +
+				"count(*)              as vote_count " +
+				"from vote" +
+				"       inner join election_registry er on vote.candidate_reg_id = er.id " +
+				"       inner join election_user voter on er.voter_id = voter.id " +
+				"where er.election_id = ?" +
+				"group by vote.candidate_reg_id ", election.id);
 	}
 }

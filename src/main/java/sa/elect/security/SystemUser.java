@@ -7,7 +7,6 @@ import sa.elect.service.projection.ElectionUser;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class SystemUser extends ElectionUser implements UserDetails {
 

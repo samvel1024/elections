@@ -12,12 +12,9 @@ import sa.elect.service.Repository;
 import sa.elect.service.projection.ElectionUser;
 import sa.elect.testutil.TestHelper;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)

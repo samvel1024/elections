@@ -13,13 +13,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ElectionSimulation {
 
+	static final int DELAY = 20;
 	final ElectionUser admin;
 	final List<ElectionUser> candidates;
 	final List<ElectionUser> registry;
 	final ElectionEndpoint api;
 	Integer electionId;
-
-	static final int DELAY = 20;
 
 	ElectionJson getElection() {
 		return api.getElections(admin).stream()

@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import sa.elect.service.projection.Election;
 import sa.elect.service.ElectionService;
+import sa.elect.service.projection.Election;
 import sa.elect.testutil.TestHelper;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collections;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,20 +24,20 @@ public class ElectionTest {
 	@Autowired ElectionService elService;
 
 	@Test(expected = Throwable.class)
-	public void inconsistentDates(){
+	public void inconsistentDates() {
 		Election test = elService.createElection(Election.builder()
 			.creatorId(testHelper.someAdmin().id)
 			.description("Test")
 			.start(testHelper.getNow())
 			.end(testHelper.getNow())
 			.deadline(testHelper.getNow())
-			.build(), List.of());
+			.build(), Collections.emptyList());
 		Assert.assertNotNull(test.id);
 	}
 
 
 	@Test
-	public void createElection(){
+	public void createElection() {
 		LocalDateTime now = testHelper.getNow();
 		Election test = elService.createElection(Election.builder()
 			.creatorId(testHelper.someAdmin().id)
@@ -56,7 +56,6 @@ public class ElectionTest {
 		users.add(testHelper.someAdmin());
 		elService.createElection(election, users);
 	}
-
 
 
 }

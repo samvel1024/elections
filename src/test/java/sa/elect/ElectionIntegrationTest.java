@@ -21,9 +21,7 @@ import sa.elect.service.projection.ElectionUser;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -58,14 +56,14 @@ public class ElectionIntegrationTest {
 
 	private void setFakeAuthContext() {
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(testHelper.someAdmin(), "",
-			List.of(new SimpleGrantedAuthority("USER"), new SimpleGrantedAuthority("ADMIN")));
+			Arrays.asList(new SimpleGrantedAuthority("USER"), new SimpleGrantedAuthority("ADMIN")));
 		SecurityContextHolder.getContext().setAuthentication(token);
 	}
 
 	@Test
 	public void fullElectionTest() {
 		setFakeAuthContext();
-		List<ElectionUser> registry = List.copyOf(testHelper.users(15));
+		List<ElectionUser> registry = new ArrayList<>(testHelper.users(15));
 		List<ElectionUser> candidates = registry.subList(0, 4);
 		ElectionSimulation el = new ElectionSimulation(testHelper.someAdmin(), candidates, registry, electionEndpoint);
 

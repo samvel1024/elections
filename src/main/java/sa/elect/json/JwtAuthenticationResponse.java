@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
-public class JwtAuthenticationResponse  {
+public class JwtAuthenticationResponse {
 	String token;
 	Integer userId;
 }
