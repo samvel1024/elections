@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import sa.elect.service.projection.ElectionUser;
+import sa.elect.testutil.TestHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +18,7 @@ import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class TestSerialization {
 
 	@Autowired TestHelper testHelper;

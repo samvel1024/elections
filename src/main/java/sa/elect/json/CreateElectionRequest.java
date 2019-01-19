@@ -2,6 +2,8 @@ package sa.elect.json;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Data
 @FieldDefaults(level = AccessLevel.PUBLIC)
+@Builder
+@AllArgsConstructor
 public class CreateElectionRequest {
 	@ApiModelProperty(notes = "Description of the election")
 	String desc;
@@ -21,4 +25,7 @@ public class CreateElectionRequest {
 	LocalDateTime end;
 	@ApiModelProperty(notes = "List of student ids which can participate in the election")
 	List<String> registryIds;
+
+	public CreateElectionRequest() {
+	}
 }

@@ -7,14 +7,17 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import sa.elect.service.ElectionService;
+import org.springframework.transaction.annotation.Transactional;
 import sa.elect.service.projection.Election;
+import sa.elect.service.ElectionService;
+import sa.elect.testutil.TestHelper;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class ElectionTest {
 
 	@Autowired TestHelper testHelper;
@@ -42,14 +45,14 @@ public class ElectionTest {
 			.start(now.plusMinutes(2))
 			.end(now.plusMinutes(3))
 			.deadline(now.plusMinutes(1))
-			.build(), testHelper.users());
+			.build(), testHelper.users(3));
 		Assert.assertNotNull(test.id);
 	}
 
 	@Test(expected = Throwable.class)
 	public void assertAdminCannotBeInRegistry() {
 		Election election = testHelper.unsavedElection();
-		val users = testHelper.users();
+		val users = testHelper.users(3);
 		users.add(testHelper.someAdmin());
 		elService.createElection(election, users);
 	}

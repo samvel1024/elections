@@ -1,18 +1,15 @@
 package sa.elect.json;
 
-
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import sa.elect.service.projection.Role;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
-public class UserJson {
-	String studentId;
-	Role role;
-	Integer id;
-	String name;
+public class ElectionResultJson extends UserJson {
+	Integer voteCount;
 }

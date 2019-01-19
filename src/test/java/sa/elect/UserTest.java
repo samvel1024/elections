@@ -7,15 +7,18 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import sa.elect.service.UserService;
 import sa.elect.service.projection.Role;
 import sa.elect.service.projection.ElectionUser;
+import sa.elect.testutil.TestHelper;
 
 import java.util.stream.Collectors;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class UserTest {
 
 	@Autowired UserService uService;
@@ -73,7 +76,7 @@ public class UserTest {
 
 	@Test
 	public void fetchByStudentId(){
-		val users = testHelper.users();
+		val users = testHelper.users(3);
 		val fetched = uService.loadByStudentIds(users.stream().map(ElectionUser::getStudentId).collect(Collectors.toList()));
 		Assert.assertEquals(users, fetched);
 	}

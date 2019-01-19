@@ -12,12 +12,14 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PUBLIC)
 @NoArgsConstructor
 public class ElectionJson {
-		Integer id;
-		LocalDateTime start;
-		LocalDateTime end;
-		LocalDateTime deadline;
-		Integer creatorId;
-		String description;
-		ElectionStage stage;
-		List<UserJson> voterRegistry;
+	Integer id;
+	LocalDateTime start;
+	LocalDateTime end;
+	LocalDateTime deadline;
+	Integer creatorId;
+	String description;
+	ElectionStage stage;
+	List<UserJson> voterRegistry;
+	List<UserJson> candidates;
+	List<ElectionResultJson> results;
 }
