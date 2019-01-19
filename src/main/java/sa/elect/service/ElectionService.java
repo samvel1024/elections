@@ -9,6 +9,7 @@ import sa.elect.service.projection.Election;
 import sa.elect.service.projection.ElectionUser;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -33,6 +34,11 @@ public class ElectionService {
 			log.debug("Added voter to election {} {}", u, el);
 		}
 		return el;
+	}
+
+	public Collection<ElectionUser> getVoterRegistry(Election el){
+		return repo.queryMultiple(ElectionUser.class, "select voter.* from election_registry " +
+			"inner join election_user voter on election_registry.voter_id = voter.id where election_id = ?", el.id);
 	}
 
 	public void addCandidacy(Election el, ElectionUser u) {

@@ -6,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import sa.elect.json.CreateElectionRequest;
-import sa.elect.json.ElectionResponse;
+import sa.elect.json.ElectionJson;
 import sa.elect.security.SystemUser;
 import sa.elect.service.ElectionService;
 import sa.elect.service.UserService;
@@ -22,7 +22,7 @@ public class ElectionEndpoint {
 
 	@RequestMapping(method = RequestMethod.POST)
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public ElectionResponse createElection(@RequestBody CreateElectionRequest req, @AuthenticationPrincipal SystemUser user) {
+	public ElectionJson createElection(@RequestBody CreateElectionRequest req, @AuthenticationPrincipal SystemUser user) {
 		Election el = electionService.createElection(Election.builder()
 			.creatorId(user.id)
 			.deadline(req.deadline)
@@ -30,7 +30,7 @@ public class ElectionEndpoint {
 			.end(req.end)
 			.start(req.start)
 			.build(), userService.loadByStudentIds(req.getRegistryIds()));
-		return mapper.map(el, ElectionResponse.class);
+		return mapper.map(el, ElectionJson.class);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/{electionId}/myCandidacy")

@@ -1,5 +1,6 @@
 package sa.elect.rest;
 
+import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sa.elect.security.SystemUser;
 import sa.elect.json.CreateUserRequest;
 import sa.elect.json.JwtAuthenticationRequest;
-import sa.elect.json.UserResponse;
+import sa.elect.json.UserJson;
 import sa.elect.security.JwtTokenProvider;
 import sa.elect.service.UserService;
 import sa.elect.service.projection.ElectionUser;
@@ -26,23 +27,19 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("auth")
 public class AuthEndpoint {
 
-	@Autowired
-	private JwtTokenProvider jwtTokenProvider;
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
-
+	@Autowired JwtTokenProvider jwtTokenProvider;
+	@Autowired AuthenticationManager authenticationManager;
 	@Autowired UserService userService;
+	@Autowired MapperFacade mapperFacade;
 
 
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public ResponseEntity<UserResponse> signin(@RequestBody JwtAuthenticationRequest req, HttpServletResponse response) {
+	public ResponseEntity<UserJson> signin(@RequestBody JwtAuthenticationRequest req, HttpServletResponse response) {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(req.studentId, req.password));
 		String token =  jwtTokenProvider.createToken(req.studentId);
 		response.addCookie(new Cookie("jwt-token",  token));
-		SystemUser principal = (SystemUser) authenticate.getPrincipal();
-		return new ResponseEntity<>(new UserResponse(
-			principal.studentId, principal.role, principal.id, principal.first + ' ' + principal.last), HttpStatus.OK);
+		ElectionUser principal = (SystemUser) authenticate.getPrincipal();
+		return new ResponseEntity<>(mapperFacade.map(principal, UserJson.class), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)

@@ -4,8 +4,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import sa.elect.service.projection.Election;
-import sa.elect.service.projection.ElectionUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.List;
 @Data
 @FieldDefaults(level = AccessLevel.PUBLIC)
 @NoArgsConstructor
-public class ElectionResponse {
+public class ElectionJson {
 		Integer id;
 		LocalDateTime start;
 		LocalDateTime end;
@@ -21,5 +19,5 @@ public class ElectionResponse {
 		Integer creatorId;
 		String description;
 		ElectionStage stage;
-		List<ElectionUser> registry;
+		List<UserJson> voterRegistry;
 }
