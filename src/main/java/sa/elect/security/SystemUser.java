@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import sa.elect.service.projection.ElectionUser;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class SystemUser extends ElectionUser implements UserDetails {
@@ -17,7 +18,7 @@ public class SystemUser extends ElectionUser implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority(role.toString()));
+		return Collections.singletonList(new SimpleGrantedAuthority(role.toString()));
 	}
 
 	@Override

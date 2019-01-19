@@ -13,6 +13,7 @@ import sa.elect.service.UserService;
 
 import javax.annotation.PostConstruct;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class JwtTokenProvider {
 
     SystemUser u = userService.loadUserByUsername(username);
     Claims claims = Jwts.claims().setSubject(username);
-    claims.put("auth", List.of(new SimpleGrantedAuthority(u.getRole().toString())));
+    claims.put("auth", Collections.singletonList(new SimpleGrantedAuthority(u.getRole().toString())));
 
     Date now = new Date();
     Date validity = new Date(now.getTime() + validityInMilliseconds);

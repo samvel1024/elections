@@ -35,7 +35,7 @@ public class Repository {
 	public void initMapper() {
 		ObjectMapper objectMapper = builder.build();
 		SimpleModule module = new SimpleModule();
-		module.addDeserializer(LocalDateTime.class, new JsonDeserializer<>() {
+		module.addDeserializer(LocalDateTime.class, new JsonDeserializer<LocalDateTime>() {
 			@Override
 			public LocalDateTime deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {
 				TextNode node = jp.getCodec().readTree(jp);

@@ -17,6 +17,7 @@ import sa.elect.service.projection.ElectionResult;
 import sa.elect.service.projection.ElectionUser;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,10 +29,10 @@ public class CustomMappingConfig implements OrikaMapperFactoryConfigurer {
 
 	@Bean
 	public CustomMapper<Election, ElectionJson> map1(@Autowired ElectionService electionService) {
-		return new CustomMapper<>() {
+		return new CustomMapper<Election, ElectionJson>() {
 
 			private ElectionStage electionStage(Election election) {
-				List<LocalDateTime> dates = List.of(election.deadline, election.start, election.end);
+				List<LocalDateTime> dates = Arrays.asList(election.deadline, election.start, election.end);
 				int pos = Collections.binarySearch(dates, LocalDateTime.now());
 				pos = pos < 0 ? -(pos + 1) : pos;
 				return ElectionStage.values()[pos];
@@ -46,7 +47,7 @@ public class CustomMappingConfig implements OrikaMapperFactoryConfigurer {
 				if (electionJson.stage == ElectionStage.CLOSED) {
 					electionJson.results = mapperFacade.mapAsList(electionService.getResults(election), ElectionResultJson.class);
 				} else {
-					electionJson.results = List.of();
+					electionJson.results = Collections.emptyList();
 				}
 			}
 		};
@@ -54,7 +55,7 @@ public class CustomMappingConfig implements OrikaMapperFactoryConfigurer {
 
 	@Bean
 	public CustomMapper<ElectionUser, UserJson> map2() {
-		return new CustomMapper<>() {
+		return new CustomMapper<ElectionUser, UserJson>() {
 			@Override
 			public void mapAtoB(ElectionUser user, UserJson userJson, MappingContext context) {
 				userJson.name = user.first + " " + user.last;
@@ -64,7 +65,7 @@ public class CustomMappingConfig implements OrikaMapperFactoryConfigurer {
 
 	@Bean
 	public CustomMapper<ElectionResult, ElectionResultJson> map3() {
-		return new CustomMapper<>() {
+		return new CustomMapper<ElectionResult, ElectionResultJson>() {
 			@Override
 			public void mapAtoB(ElectionResult user, ElectionResultJson userJson, MappingContext context) {
 				userJson.name = user.first + " " + user.last;
