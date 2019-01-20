@@ -1,4 +1,4 @@
-package sa.elect.testutil;
+package sa.elect;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
