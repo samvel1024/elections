@@ -24,14 +24,14 @@ Tou might also need to add `server.port=1234` to override the default value of 8
 
 #### Running the app
 
-To run the app you need to build it with `mvn package` which will run all the tests against the DB.
+To run the app you need to build it with `mvn package` which will run all the tests against the DB. You can copy the following to a shell script file and run it like `./script.sh /absolute/path/to/elections.properties`
 
 ```bash
 git clone https://github.com/samvel1024/elections.git;
 cd elections;
-mvn package -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties};
+mvn package -Dspring.config.location=classpath:/,file:$1;
 cd target;
-java -jar -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties} election-0.0.1-SNAPSHOT.jar;
+java -jar -Dspring.config.location=classpath:/,file:$1 election-0.0.1-SNAPSHOT.jar;
 ```
 
 #### Accessing the documentation
