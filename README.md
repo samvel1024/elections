@@ -33,3 +33,29 @@ java -jar -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_
 #### Accessing the documentation
 
 Documentation is in swagger format and is accessible in `http://localhost:8080/swagger-ui.html`
+
+
+####  Authentication
+
+Authentication is managed through `/auth/signin` and `/auth/signup` endpoints. To be able to use the `/election/*` endpoint you need to set the `jwt-token` header, which is sent as a header in the response when you signin. As an example here is a raw request for election creation.
+
+```
+curl -X POST \
+  http://localhost:8080/election \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 5036f916-3eaf-423d-abd8-3c89c428afdb' \
+  -H 'cache-control: no-cache' \
+  -H 'jwt-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDAwMDAwMCIsImF1dGgiOlt7ImF1dGhvcml0eSI6IkFETUlOIn1dLCJpYXQiOjE1NDc5MDQ0MzgsImV4cCI6MTU0ODI2NDQzOH0.rVY8sohj6Pfy6OshR22R0Cd3fGGdI68WHLh6J99YDZ4' \
+  -d '{
+  "deadline": "2019-01-19T17:03:27.616",
+  "desc": "string",
+  "end": "2019-01-19T17:05:27.616",
+  "registryIds": [
+    "aa663543", "aa327196", "aa674888", "wq123456"
+  ],
+  "start": "2019-01-19T17:04:27.618"
+}
+'
+```
+
+
