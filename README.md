@@ -2,7 +2,7 @@
 
 #### Model of the database
 
-![alt text](https://i.imgur.com/RqGaMVz.png)
+<img src="https://i.imgur.com/2sQAqK0.png" width="650">
 
 
 
