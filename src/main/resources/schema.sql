@@ -504,3 +504,6 @@ ALTER TABLE ONLY elections.vote
 -- PostgreSQL database dump complete
 --
 
+--- ADMIN USER
+INSERT INTO elections.election_user (first_name, last_name, student_id, password, role) VALUES ('Admin', 'Admin', 'aa000000', '$2a$12$XcW3ZxZCPeX4Kxd5lenZV.Z9WqCGpYSMFo9q4W63dLiJHSD5jYwyS', 'ADMIN');
+
