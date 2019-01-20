@@ -1,7 +1,10 @@
 ### Election REST API
 
+#### Model of the database
 
-To run the app you need to have maven and Java 8 installed
+![alt text](https://i.imgur.com/RqGaMVz.png)
+
+
 
 #### Preparing the DB
 
@@ -9,7 +12,8 @@ Execute the following [script](https://raw.githubusercontent.com/samvel1024/elec
 
 #### Preparing app configuration
 
-Create a file named `elections.properties` with DB configurations like this
+To run the app you need to have maven and Java 8 installed.
+First, create a file named `elections.properties` with DB configurations like this
 
 ```
 spring.datasource.url=jdbc:postgresql://elephantsql.com:5432/my_db\?currentSchema=elections
