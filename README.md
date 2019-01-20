@@ -43,7 +43,6 @@ Authentication is managed through `/auth/signin` and `/auth/signup` endpoints. T
 curl -X POST \
   http://localhost:8080/election \
   -H 'Content-Type: application/json' \
-  -H 'Postman-Token: 5036f916-3eaf-423d-abd8-3c89c428afdb' \
   -H 'cache-control: no-cache' \
   -H 'jwt-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDAwMDAwMCIsImF1dGgiOlt7ImF1dGhvcml0eSI6IkFETUlOIn1dLCJpYXQiOjE1NDc5MDQ0MzgsImV4cCI6MTU0ODI2NDQzOH0.rVY8sohj6Pfy6OshR22R0Cd3fGGdI68WHLh6J99YDZ4' \
   -d '{
