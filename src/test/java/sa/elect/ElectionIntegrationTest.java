@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 public class ElectionIntegrationTest {
 
 	@Autowired ElectionEndpoint electionEndpoint;
-	@Autowired sa.elect.testutil.TestHelper testHelper;
+	@Autowired TestHelper testHelper;
 
 
 	private void sleepUntill(LocalDateTime t) {

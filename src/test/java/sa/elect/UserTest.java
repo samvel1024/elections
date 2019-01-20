@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import sa.elect.service.UserService;
 import sa.elect.service.projection.ElectionUser;
 import sa.elect.service.projection.Role;
-import sa.elect.testutil.TestHelper;
 
 import java.util.stream.Collectors;
 

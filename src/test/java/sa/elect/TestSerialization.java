@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import sa.elect.service.Repository;
 import sa.elect.service.projection.ElectionUser;
-import sa.elect.testutil.TestHelper;
 
 import java.util.HashMap;
 import java.util.Map;
