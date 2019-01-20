@@ -1,7 +1,10 @@
 ### Election REST API
 
+#### Model of the database
 
-To run the app you need to have maven and Java 8 installed
+<img src="https://i.imgur.com/2sQAqK0.png" width="650">
+
+
 
 #### Preparing the DB
 
@@ -9,13 +12,15 @@ Execute the following [script](https://raw.githubusercontent.com/samvel1024/elec
 
 #### Preparing app configuration
 
-Create a file named `elections.properties` with DB configurations like this
+To run the app you need to have maven and Java 8 installed.
+First, create a file named `elections.properties` with DB configurations like this
 
 ```
 spring.datasource.url=jdbc:postgresql://elephantsql.com:5432/my_db\?currentSchema=elections
 spring.datasource.username=my_username 
 spring.datasource.password=my_password
 ```
+Tou might also need to add `server.port=1234` to override the default value of 8080
 
 #### Running the app
 
@@ -26,9 +31,34 @@ git clone https://github.com/samvel1024/elections.git;
 cd elections;
 mvn package -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties};
 cd target;
-java -jar election-0.0.1-SNAPSHOT.jar  -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties};
+java -jar -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties} election-0.0.1-SNAPSHOT.jar;
 ```
 
 #### Accessing the documentation
 
 Documentation is in swagger format and is accessible in `http://localhost:8080/swagger-ui.html`
+
+
+####  Authentication
+
+Authentication is managed through `/auth/signin` and `/auth/signup` endpoints. To be able to use the `/election/*` endpoint you need to set the `jwt-token` header, which is sent as a header in the response when you signin. As an example here is a raw request for election creation.
+
+```
+curl -X POST \
+  http://localhost:8080/election \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache' \
+  -H 'jwt-token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDAwMDAwMCIsImF1dGgiOlt7ImF1dGhvcml0eSI6IkFETUlOIn1dLCJpYXQiOjE1NDc5MDQ0MzgsImV4cCI6MTU0ODI2NDQzOH0.rVY8sohj6Pfy6OshR22R0Cd3fGGdI68WHLh6J99YDZ4' \
+  -d '{
+  "deadline": "2019-01-19T17:03:27.616",
+  "desc": "string",
+  "end": "2019-01-19T17:05:27.616",
+  "registryIds": [
+    "aa663543", "aa327196", "aa674888", "wq123456"
+  ],
+  "start": "2019-01-19T17:04:27.618"
+}
+'
+```
+
+
