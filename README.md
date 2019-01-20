@@ -16,6 +16,7 @@ spring.datasource.url=jdbc:postgresql://elephantsql.com:5432/my_db\?currentSchem
 spring.datasource.username=my_username 
 spring.datasource.password=my_password
 ```
+Tou might also need to add `server.port=1234` to override the default value of 8080
 
 #### Running the app
 
@@ -26,7 +27,7 @@ git clone https://github.com/samvel1024/elections.git;
 cd elections;
 mvn package -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties};
 cd target;
-java -jar election-0.0.1-SNAPSHOT.jar  -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties};
+java -jar -Dspring.config.location=classpath:/,file:{absolute_path_to_elections_properties} election-0.0.1-SNAPSHOT.jar;
 ```
 
 #### Accessing the documentation
